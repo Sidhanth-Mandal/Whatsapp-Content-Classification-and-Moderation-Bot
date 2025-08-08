@@ -70,7 +70,7 @@ Categories:
 - Plain: Normal conversation, neutral statements, everyday chat
 - Helpful: Advice, assistance, informative content, solutions
 - Curious: Questions, expressions of wonder, seeking information
-- Super Offensive: Hate speech, severe profanity, threats, harassment, discriminatory content
+- Super Offensive: Extremely abusive content that includes hate speech, serious threats, targeted harassment, or severely inappropriate language. Ignore light sarcasm, jokes, friendly banter, or minor arguments.
 
 Message to classify: "${messageContent}"
 
