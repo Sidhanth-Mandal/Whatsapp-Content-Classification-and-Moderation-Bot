@@ -13,8 +13,6 @@ class CommandHandler {
             '/removewarn': this.handleRemoveWarnCommand.bind(this),
             '/appreciate': this.handleAppreciateCommand.bind(this),
             '/removeappreciation': this.handleRemoveAppreciationCommand.bind(this),
-            
-            // Stats commands (everyone)
             '/stats': this.handleStatsCommand.bind(this),
             '/allstats': this.handleAllStatsCommand.bind(this),
             '/help': this.handleHelpCommand.bind(this)
@@ -34,7 +32,7 @@ class CommandHandler {
         }
 
         // Check admin permissions for admin-only commands
-        const adminCommands = ['/warn', '/removewarn', '/appreciate', '/removeappreciation', '/addgroup', '/removegroup', '/listgroups'];
+        const adminCommands = ['/warn', '/removewarn', '/appreciate', '/removeappreciation', '/addgroup', '/removegroup', '/listgroups','/stats','/allstats','/help`'];
         if (adminCommands.includes(command) && !isAdmin) {
             await this.sendReply(sock, message, "❌ This command requires admin permissions.");
             return;
