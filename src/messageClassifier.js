@@ -11,9 +11,17 @@ class MessageClassifier {
         }
     }
 
+    
     async classifyMessage(messageContent) {
         try {
-            const prompt = this.buildClassificationPrompt(messageContent);
+
+            const bannedWordsRegex = /\b(fuck|bitch|slut|cunt|nigger)\b/i;  // case-insensitive and word-boundary-safe
+            
+            if (bannedWordsRegex.test(messageContent)) {
+                return 'Super Offensive';
+            }
+            
+                const prompt = this.buildClassificationPrompt(messageContent);
             
             const response = await axios.post(this.apiUrl, {
                 model: 'llama-3.1-8b-instant', // Using Llama as it's available on Groq
