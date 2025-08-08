@@ -18,7 +18,7 @@ class MessageClassifier {
             const bannedWordsRegex = /\b(fuck|bitch|slut|cunt|nigger)\b/i;  // case-insensitive and word-boundary-safe
             
             if (bannedWordsRegex.test(messageContent)) {
-                return 'Super Offensive';
+                return 'Other-soc-related';
             }
             
                 const prompt = this.buildClassificationPrompt(messageContent);

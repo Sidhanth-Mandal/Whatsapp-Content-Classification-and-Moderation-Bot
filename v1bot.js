@@ -138,6 +138,10 @@ class WhatsAppBot {
             await this.handleOffensiveMessage(message, sender, chatId);
             return;
         }
+        else if (classification === 'Other-soc-related') {
+            await this.handleOtherSocMessage(message, sender, chatId);
+            return;  
+        }
 
         // Update user stats for non-offensive messages
         this.statsManager.updateMessageStats(sender, classification);
@@ -153,6 +157,24 @@ class WhatsAppBot {
             
             // Send warning message
             const warningText = `⚠️ Warning: Your message was deleted for being offensive. This is an automated warning.`;
+            await this.sock.sendMessage(chatId, { text: warningText });
+            
+            console.log(`Deleted offensive message from ${sender}`);
+        } catch (error) {
+            console.error('Error handling offensive message:', error);
+        }
+    }
+
+    async handleOtherSocMessage(message, sender, chatId) {
+        try {
+            // Delete the message
+            await this.sock.sendMessage(chatId, { delete: message.key });
+            
+            // Add warning to user
+            this.statsManager.addWarning(sender, 'Automated: Discussions about other societies are not allowed in the IGTS Freshers Group. Please keep the conversation relevant to IGTS.');
+            
+            // Send warning message
+            const warningText = `⚠️ Your message was deleted for mentioning other societies. This group is strictly for IGTS-related discussions.`;
             await this.sock.sendMessage(chatId, { text: warningText });
             
             console.log(`Deleted offensive message from ${sender}`);
