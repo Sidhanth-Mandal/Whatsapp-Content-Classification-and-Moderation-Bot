@@ -15,7 +15,7 @@ class MessageClassifier {
     async classifyMessage(messageContent) {
         try {
 
-            const bannedWordsRegex = /\b(fuck|bitch|slut|cunt|nigger)\b/i;  // case-insensitive and word-boundary-safe
+            const bannedWordsRegex = /\b(gdsc|enactus|ares|kalpana|devsoc|devcomm|rotaract|junoon|Mirage|fes|finsoc|crescendo|tds)\b/i;  // case-insensitive and word-boundary-safe
             
             if (bannedWordsRegex.test(messageContent)) {
                 return 'Other-soc-related';
@@ -24,7 +24,7 @@ class MessageClassifier {
                 const prompt = this.buildClassificationPrompt(messageContent);
             
             const response = await axios.post(this.apiUrl, {
-                model: 'llama-3.1-8b-instant', // Using Llama as it's available on Groq
+                model: 'qwen/qwen3-32b', // Using qwen as it's available on Groq
                 messages: [
                     {
                         role: 'system',
@@ -70,7 +70,7 @@ Categories:
 - Plain: Normal conversation, neutral statements, everyday chat
 - Helpful: Advice, assistance, informative content, solutions
 - Curious: Questions, expressions of wonder, seeking information
-- Super Offensive: Extremely abusive content that includes hate speech, serious threats, targeted harassment, or severely inappropriate language. Ignore light sarcasm, jokes, friendly banter, or minor arguments.
+- Super Offensive: ONLY IF Life threats , Abusive Words in Hinglish , harassment is detected . Else even if sentiment is negative classify it as Plain.
 
 Message to classify: "${messageContent}"
 
